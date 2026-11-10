@@ -1,0 +1,237 @@
+@import "tailwindcss";
+
+@theme {
+  --color-accent: #ff3b2f;
+  --color-accent-hover: #ff5447;
+  --color-accent-glow: rgba(255, 59, 47, 0.28);
+  --color-bg-dark: #09090b;
+
+  --font-anton: var(--font-anton), Anton, sans-serif;
+  --font-sans: var(--font-geist-sans), Geist, sans-serif;
+  --font-mono: var(--font-geist-mono), "Geist Mono", monospace;
+  --font-caveat: var(--font-caveat-brush), "Caveat Brush", cursive;
+}
+
+:root {
+  --background: #09090b;
+  --foreground: #f4f4f5;
+  --accent-red: #ff3b2f;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #09090b;
+  color: #f4f4f5;
+  font-family: var(--font-geist-sans), sans-serif;
+}
+
+body {
+  background-color: #09090b;
+  color: #f4f4f5;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* -------------------------------------------------------------
+   SIGNATURE AGENT BUILD SYSTEM STYLES
+   ------------------------------------------------------------- */
+
+/* When build mode is active, hide unbuilt elements until robot cursors build them */
+.build-mode [data-build]:not(.is-built) {
+  visibility: hidden !important;
+}
+
+/* Once built, force visibility */
+[data-build].is-built {
+  visibility: visible !important;
+}
+
+/* Actively building styles */
+[data-build].is-building {
+  visibility: visible !important;
+}
+
+/* TYPE effect */
+[data-build="type"].is-building {
+  animation: typeBlink 0.7s infinite;
+}
+
+/* POP effect */
+[data-build="pop"].is-building {
+  animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* WIPE effect */
+[data-build="wipe"].is-building {
+  animation: wipeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  70% {
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes wipeIn {
+  0% {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    opacity: 1;
+    clip-path: inset(0 0% 0 0);
+  }
+}
+
+/* -------------------------------------------------------------
+   METALLIC HERO GRADIENT & SHEEN SWEEP
+   ------------------------------------------------------------- */
+.metallic-portfolio-text {
+  background: linear-gradient(180deg, #ff3b2f 0%, #a01712 30%, #300806 70%, #09090b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.metallic-portfolio-text::after {
+  content: "PORTFOLIO";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    transparent 40%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 60%,
+    transparent 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: sheenSweep 7s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes sheenSweep {
+  0% {
+    background-position: 200% 0;
+  }
+  45% {
+    background-position: -150% 0;
+  }
+  100% {
+    background-position: -150% 0;
+  }
+}
+
+/* -------------------------------------------------------------
+   ROBOT CURSOR ANIMATIONS (LEDs & Antenna)
+   ------------------------------------------------------------- */
+@keyframes robotBlink {
+  0%, 88%, 100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  92% {
+    opacity: 0.15;
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes antennaPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+    box-shadow: 0 0 4px #ff3b2f;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.4);
+    box-shadow: 0 0 10px #ff3b2f, 0 0 16px #ff3b2f;
+  }
+}
+
+.robot-led-eye {
+  animation: robotBlink 3.6s infinite ease-in-out;
+}
+
+.robot-antenna-tip {
+  animation: antennaPulse 1.8s infinite ease-in-out;
+}
+
+/* -------------------------------------------------------------
+   ENDLESS MARQUEE ANIMATION
+   ------------------------------------------------------------- */
+@keyframes marqueeLeftToRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee-ltr {
+  display: flex;
+  width: max-content;
+  animation: marqueeLeftToRight 38s linear infinite;
+}
+
+.marquee-container:hover .animate-marquee-ltr {
+  animation-play-state: paused;
+}
+
+/* -------------------------------------------------------------
+   CUSTOM UTILITIES & BUTTON INTERACTION STATES
+   ------------------------------------------------------------- */
+.custom-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.custom-btn:focus-visible {
+  outline: 2px solid #ff3b2f;
+  outline-offset: 2px;
+}
+
+.custom-btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.custom-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #09090b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
