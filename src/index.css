@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: #070913;
+    --accent-pink: #ff007f;
+    --accent-cyan: #00f0ff;
+    --accent-purple: #9d4edd;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: #030409;
+    color: #e2e8f0;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* Custom Slim Notebook Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #070913;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #1c2042;
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ff007f;
+  }
+}
+
+/* Lenis Recommended Styles */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Glassmorphism & Neon Helper Utilities */
+.glass-panel {
+  background: rgba(12, 14, 30, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  border-color: rgba(255, 0, 127, 0.4);
+  box-shadow: 0 0 20px rgba(255, 0, 127, 0.15);
+  transform: translateY(-2px);
+}
+
+.code-badge {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  background: rgba(18, 21, 43, 0.8);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  color: #00f0ff;
+}
+
+/* Grid Background */
+.bg-grid-pattern {
+  background-size: 36px 36px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+/* Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
